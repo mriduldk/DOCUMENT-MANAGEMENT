@@ -1,0 +1,11 @@
+::ng-deep { /* to penetrate <ngx-editor> CSS styling */
+
+  .NgxEditor {
+    height: 200px;
+    overflow-y: scroll;
+  }
+
+  .NgxEditor__Content {
+    min-height: 300px; /* make all of the editor area clickable */
+  }
+}
