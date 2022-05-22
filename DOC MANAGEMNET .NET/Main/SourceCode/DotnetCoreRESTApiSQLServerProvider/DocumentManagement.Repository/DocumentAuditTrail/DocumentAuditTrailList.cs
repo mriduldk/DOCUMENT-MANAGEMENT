@@ -51,6 +51,7 @@ namespace DocumentManagement.Repository
                 {
                     Id = c.Id,
                     DocumentId = c.DocumentId,
+                    Url = c.Document.Url,
                     CreatedDate = c.CreatedDate,
                     DocumentName = c.Document.Name,
                     CategoryName = c.Document.Category.Name,
@@ -58,6 +59,7 @@ namespace DocumentManagement.Repository
                     OperationName = c.OperationName.ToString(),
                     PermissionUser = c.AssignToUserId != null ? $"{c.AssignToUser.FirstName} {c.AssignToUser.LastName}" : "",
                     PermissionRole = c.AssignToRoleId != null ? $"{c.AssignToRole.Name}" : "",
+                    IsAllowDownload = true
                 })
                 .ToListAsync();
             return entities;
