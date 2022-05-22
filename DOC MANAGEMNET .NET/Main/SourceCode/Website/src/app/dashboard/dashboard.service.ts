@@ -58,4 +58,14 @@ export class DashboradService {
     return this.httpClient.get<CalenderReminderDto[]>(url)
       .pipe(catchError(this.commonHttpErrorService.handleError));
   }
+
+  getRecentlyViewed(): Observable<any> {
+    const url = `DocumentAuditTrail/RecentlyViewedDocuments`;
+    return this.httpClient.get<any>(url).pipe(catchError(this.commonHttpErrorService.handleError));
+  }
+
+  getFavouriteDocument(): Observable<any> {
+    const url = `DocumentAuditTrail/GetFavouirteDocuments`;
+    return this.httpClient.get<any>(url).pipe(catchError(this.commonHttpErrorService.handleError));
+  }
 }

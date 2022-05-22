@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, In
 import { MatDialog } from '@angular/material/dialog';
 import { CommonDialogService } from '@core/common-dialog/common-dialog.service';
 import { Category } from '@core/domain-classes/category';
+import { SubCategory } from '@core/domain-classes/subCategory';
 import { CategoryService } from '@core/services/category.service';
 import { TranslationService } from '@core/services/translation.service';
 import { BaseComponent } from 'src/app/base.component';
@@ -20,6 +21,11 @@ import { ManageCategoryComponent } from '../manage-category/manage-category.comp
       state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
+    trigger('detailSubCategoryExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
   ],
 })
 export class CategoryListPresentationComponent extends BaseComponent implements OnInit {
@@ -28,9 +34,12 @@ export class CategoryListPresentationComponent extends BaseComponent implements 
   @Output() addEditCategoryHandler: EventEmitter<Category> = new EventEmitter<Category>();
   @Output() deleteCategoryHandler: EventEmitter<string> = new EventEmitter<string>();
   columnsToDisplay: string[] = ['subcategory', 'action', 'name'];
-  subCategoryColumnToDisplay: string[] = ['action', 'name'];
+  subCategoryColumnToDisplay: string[] = ['subChildCategory', 'action', 'name'];
+  subChildCategoryColumnToDisplay : string[] = ['action', 'name'];
   subCategories: Category[] = [];
+  subChildCategory : SubCategory[] = [];
   expandedElement: Category | null;
+  subCategoryExpandedElement : SubCategory | null;
   constructor(
     private dialog: MatDialog,
     private commonDialogService: CommonDialogService,
@@ -53,12 +62,31 @@ export class CategoryListPresentationComponent extends BaseComponent implements 
     });
   }
 
+  toggleSubCategoryRow(element: SubCategory) {
+    this.subChildCategory = [];
+    this.categoryService.getSubSubCategories(element.id).subscribe(subCat => {
+      this.subChildCategory = subCat;
+      this.subCategoryExpandedElement = this.subCategoryExpandedElement === element ? null : element;
+      this.cd.detectChanges();
+    });
+  }
+
   deleteCategory(category: Category): void {
     this.sub$.sink = this.commonDialogService
       .deleteConformationDialog(`${this.translationService.getValue('ARE_YOU_SURE_YOU_WANT_TO_DELETE')} ${category.name}`)
       .subscribe(isTrue => {
         if (isTrue) {
           this.deleteCategoryHandler.emit(category.id);
+        }
+      });
+  }
+
+  deleteSubCategory(subCategory: SubCategory): void {
+    this.sub$.sink = this.commonDialogService
+      .deleteConformationDialog(`${this.translationService.getValue('ARE_YOU_SURE_YOU_WANT_TO_DELETE')} ${subCategory.name}`)
+      .subscribe(isTrue => {
+        if (isTrue) {
+          this.deleteCategoryHandler.emit(subCategory.id);
         }
       });
   }

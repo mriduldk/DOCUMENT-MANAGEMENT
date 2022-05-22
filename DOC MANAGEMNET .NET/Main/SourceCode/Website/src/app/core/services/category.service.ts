@@ -35,6 +35,11 @@ export class CategoryService {
     return this.httpClient.get<Category[]>(url);
   }
 
+  getSubSubCategories(id: string) {
+    const url = `Category/${id}/subsubcategories`;
+    return this.httpClient.get<Category[]>(url);
+  }
+
   getAllCategoriesForDropDown() {
     const url = `Category/dropdown`;
     return this.httpClient.get<Category[]>(url);
