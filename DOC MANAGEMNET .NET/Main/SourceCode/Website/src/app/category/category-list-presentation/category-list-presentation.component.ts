@@ -64,7 +64,7 @@ export class CategoryListPresentationComponent extends BaseComponent implements 
 
   toggleSubCategoryRow(element: SubCategory) {
     this.subChildCategory = [];
-    this.categoryService.getSubCategories(element.id).subscribe(subCat => {
+    this.categoryService.getSubSubCategories(element.id).subscribe(subCat => {
       this.subChildCategory = subCat;
       this.subCategoryExpandedElement = this.subCategoryExpandedElement === element ? null : element;
       this.cd.detectChanges();
