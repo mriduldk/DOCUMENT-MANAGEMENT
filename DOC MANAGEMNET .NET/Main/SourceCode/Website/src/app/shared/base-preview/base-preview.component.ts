@@ -65,7 +65,7 @@ export class BasePreviewComponent extends BaseComponent implements OnInit {
   }
 
   getIsDownloadFlag() {
-    this.sub$.sink = this.commonService.isDownloadFlag(this.currentDoc.documentId)
+    this.sub$.sink = this.commonService.isDownloadFlag(this.currentDoc.documentId, this.data?.fromArchive)
       .subscribe(c => {
         this.isDownloadFlag = c;
       });

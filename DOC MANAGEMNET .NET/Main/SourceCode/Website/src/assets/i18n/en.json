@@ -25,6 +25,7 @@
   "DASHBOARD": "Dashboard",
   "ASSIGNED_DOCUMENTS": "Assigned Documents",
   "ALL_DOCUMENTS": "All Documents",
+  "ARCHIVE_DOCUMENTS": "Archive Documents",
   "DOCUMENTS_AUDIT_TRAIL": "Documents Audit Trail",
   "ROLES": "Roles",
   "USERS": "Users",

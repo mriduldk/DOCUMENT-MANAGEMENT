@@ -3,4 +3,5 @@ export interface DocumentView {
   isRestricted: boolean;
   extension: string;
   name: string;
+  fromArchive?: boolean;
 }

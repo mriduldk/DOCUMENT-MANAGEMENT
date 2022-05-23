@@ -49,8 +49,17 @@ export class CommonService {
     });
   }
 
-  isDownloadFlag(documentId: string): Observable<boolean> {
-    const url = `document/${documentId}/isDownloadFlag`;
+  archiveDownloadDocument(documentId: string): Observable<HttpEvent<Blob>> {
+    const url = `ArchiveDocument/${documentId}/download`;
+    return this.httpClient.get(url, {
+      reportProgress: true,
+      observe: 'events',
+      responseType: 'blob',
+    });
+  }
+
+  isDownloadFlag(documentId: string, fromArchive : boolean = false): Observable<boolean> {
+    const url = fromArchive ? `ArchiveDocument/${documentId}/isDownloadFlag` : `document/${documentId}/isDownloadFlag`;
     return this.httpClient.get<boolean>(url);
   }
 

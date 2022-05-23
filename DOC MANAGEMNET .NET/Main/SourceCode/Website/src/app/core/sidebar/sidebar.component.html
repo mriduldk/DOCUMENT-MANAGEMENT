@@ -25,6 +25,14 @@
             <span class="nav-text">{{'ALL_DOCUMENTS' | translate}}</span>
           </div>
         </li>
+        <li *hasClaim="'all_documents_view_documents'" class="nav-item" [routerLink]="['/archive/documents']"
+          [routerLinkActive]="['active']" routerLinkActive="router-link-active"
+          [routerLinkActiveOptions]="{exact:true}">
+          <div class="nav-item-hold">
+            <i class="nav-icon las la-file-pdf"></i>
+            <span class="nav-text">{{'ARCHIVE_DOCUMENTS' | translate}}</span>
+          </div>
+        </li>
         <li *hasClaim="'document_category_view_categories'" class="nav-item" [routerLink]="['/categories']"
           [routerLinkActive]="['active']" routerLinkActive="router-link-active"
           [routerLinkActiveOptions]="{exact:true}">
