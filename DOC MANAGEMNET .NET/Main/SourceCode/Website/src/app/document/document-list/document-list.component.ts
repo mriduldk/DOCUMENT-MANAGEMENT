@@ -293,6 +293,24 @@ export class DocumentListComponent extends BaseComponent implements OnInit, Afte
     });
   }
 
+  archiveDocument = (document : DocumentInfo) => {
+    const reqObj = {
+      name : document.name,
+      description: document?.description,
+      url: document?.url,
+      categoryId: document.categoryId,
+      id: document.id
+    };
+
+    this.documentService.archiveDocuments(reqObj)
+    .subscribe(
+      (resp: HttpResponse<any>) => {
+        console.log(resp);
+        this.documentService.deleteDocument(document.id).subscribe(r => console.log(r));
+      },
+    );
+  }
+
   private downloadFile(data: HttpResponse<Blob>, documentInfo: DocumentInfo) {
     const downloadedFile = new Blob([data.body], { type: data.body.type });
     const a = document.createElement('a');

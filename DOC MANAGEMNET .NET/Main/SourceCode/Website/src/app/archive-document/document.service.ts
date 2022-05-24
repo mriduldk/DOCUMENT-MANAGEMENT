@@ -42,7 +42,7 @@ export class DocumentService {
   }
 
   getDocuments(resource: DocumentResource): Observable<HttpResponse<DocumentInfo[]> | CommonError> {
-    const url = `ArchiveDocument`;
+    const url = `ArchiveDocuments`;
     const customParams = new HttpParams()
       .set('Fields', resource.fields)
       .set('OrderBy', resource.orderBy)

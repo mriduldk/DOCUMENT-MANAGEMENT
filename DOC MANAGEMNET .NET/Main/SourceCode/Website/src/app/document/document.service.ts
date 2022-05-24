@@ -59,4 +59,9 @@ export class DocumentService {
       observe: 'response'
     }).pipe(catchError(this.commonHttpErrorService.handleError));
   }
+
+  archiveDocuments = (reqObj : any) : Observable<HttpResponse<any> | CommonError> => {
+    const url = `ArchiveDocument`;
+    return this.httpClient.post<any>(url, reqObj).pipe(catchError(this.commonHttpErrorService.handleError));
+  }
 }

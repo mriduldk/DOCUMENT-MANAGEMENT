@@ -109,6 +109,10 @@
               <mat-icon>notifications</mat-icon>
               {{'ADD_REMINDER' | translate}}
             </button>
+            <button class="btn btn-light btn-sm" mat-menu-item (click)="archiveDocument(document)" type="button">
+              <mat-icon>archive</mat-icon>
+              {{'ARCHIVE_DOCUMENTS' | translate}}
+            </button>
             <button *hasClaim="'all_documents_delete_document'" mat-menu-item class="btn btn-light btn-sm"
               (click)="deleteDocument(document)" type="button">
               <mat-icon>delete</mat-icon>

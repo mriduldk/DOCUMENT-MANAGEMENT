@@ -82,11 +82,11 @@
             <i class="las la-ellipsis-v"></i>
           </button>
           <mat-menu #menu="matMenu">
-            <button *hasClaim="'all_documents_edit_document'" mat-menu-item class="btn btn-light btn-sm"
+            <!-- <button *hasClaim="'all_documents_edit_document'" mat-menu-item class="btn btn-light btn-sm"
               (click)="editDocument(document)">
               <mat-icon>edit</mat-icon>
               {{'EDIT' | translate}}
-            </button>
+            </button> -->
             <button *hasClaim="'all_documents_share_document'" mat-menu-item class="btn btn-light btn-sm"
               (click)="manageDocumentPermission(document)" type="button">
               <mat-icon>share</mat-icon>
@@ -105,10 +105,10 @@
               <mat-icon>forward_to_inbox</mat-icon>
               {{'SEND_EMAIL' | translate}}
             </button>
-            <button class="btn btn-light btn-sm" mat-menu-item (click)="addReminder(document)" type="button">
+            <!-- <button class="btn btn-light btn-sm" mat-menu-item (click)="addReminder(document)" type="button">
               <mat-icon>notifications</mat-icon>
               {{'ADD_REMINDER' | translate}}
-            </button>
+            </button> -->
             <button *hasClaim="'all_documents_delete_document'" mat-menu-item class="btn btn-light btn-sm"
               (click)="deleteDocument(document)" type="button">
               <mat-icon>delete</mat-icon>

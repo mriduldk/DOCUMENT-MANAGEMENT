@@ -40,8 +40,8 @@ export class CommonService {
     return this.httpClient.post<DocumentAuditTrail>('documentAuditTrail', documentAuditTrail);
   }
 
-  downloadDocument(documentId: string): Observable<HttpEvent<Blob>> {
-    const url = `document/${documentId}/download`;
+  downloadDocument(documentId: string, fromArchive : boolean = false): Observable<HttpEvent<Blob>> {
+    const url = fromArchive ? `ArchiveDocument/${documentId}/download` : `document/${documentId}/download`;
     return this.httpClient.get(url, {
       reportProgress: true,
       observe: 'events',
