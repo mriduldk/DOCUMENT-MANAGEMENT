@@ -37,8 +37,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     })
   }
 
-  onDocumentView(document: DocumentInfo) {
-    console.log(document);
+  onDocumentView = (document: DocumentInfo) => {
     const urls = document.url.split('.');
     const extension = urls[1];
     const documentView: DocumentView = {

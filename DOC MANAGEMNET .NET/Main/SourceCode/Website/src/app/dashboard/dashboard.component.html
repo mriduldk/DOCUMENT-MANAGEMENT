@@ -5,7 +5,7 @@
             <ng-container>
                 <ul style="list-style-type: none;margin-top: 10px;">
                     <li *ngFor="let r of recentlyViewedDocuments">
-                        <a href="#" onClick="onDocumentView(r)">{{r.documentName}}</a>
+                        <a (click)="onDocumentView(r)" style="color: rgb(79, 79, 198); cursor:pointer;">{{r.documentName}}</a>
                     </li>
                 </ul>
             </ng-container>
@@ -17,7 +17,7 @@
             <ng-container>
                 <ul style="list-style-type: none;margin-top: 10px;">
                     <li *ngFor="let f of favouriteDocuments">
-                        <a href="#" onClick="onDocumentView(f)">{{f.documentName}}</a>
+                        <a (click)="onDocumentView(f)" style="color: rgb(79, 79, 198); cursor:pointer;">{{f.documentName}}</a>
                     </li>
                 </ul>
             </ng-container>
