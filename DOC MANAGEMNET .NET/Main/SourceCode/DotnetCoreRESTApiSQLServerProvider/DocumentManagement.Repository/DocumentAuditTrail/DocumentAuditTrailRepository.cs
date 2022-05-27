@@ -65,7 +65,7 @@ namespace DocumentManagement.Repository
         public async Task<DocumentAuditTrailList> GetRecentlyViewedDocuments(DocumentResource documentResource)
         {
             var collectionBeforePaging = AllIncluding(c => c.CreatedByUser, d => d.Document, c => c.Document.Category)
-                .Where(e => (e.OperationName.Equals(DocumentOperation.Read)));
+                .Where(e => (e.OperationName.Equals(DocumentOperation.Read) || e.OperationName.Equals(DocumentOperation.Download)));
 
             collectionBeforePaging =
                collectionBeforePaging.ApplySort(documentResource.OrderBy,

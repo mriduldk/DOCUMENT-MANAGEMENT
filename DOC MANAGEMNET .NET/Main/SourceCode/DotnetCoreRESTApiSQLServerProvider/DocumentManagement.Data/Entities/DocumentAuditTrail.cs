@@ -19,7 +19,6 @@ namespace DocumentManagement.Data.Entities
         public User AssignToUser { get; set; }
         [ForeignKey("AssignToRoleId")]
         public Role AssignToRole { get; set; }
-        public bool IsAllowDownload { get; set; }
 
     }
 }
