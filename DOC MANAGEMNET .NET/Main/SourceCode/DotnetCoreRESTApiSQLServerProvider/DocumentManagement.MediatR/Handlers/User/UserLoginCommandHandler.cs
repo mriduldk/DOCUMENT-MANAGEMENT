@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.IO;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace DocumentManagement.MediatR.Handlers
 {
@@ -50,7 +51,61 @@ namespace DocumentManagement.MediatR.Handlers
                 Longitude = request.Longitude
             };
             var result = await _signInManager.PasswordSignInAsync(request.UserName, request.Password, false, false);
-            if (result.Succeeded)
+
+            var result2 = _userRepository.FindBy(c => c.UserName == request.UserName).FirstOrDefaultAsync();
+            //var user = await _userRepository.AllIncluding(c => c.UserName).FirstOrDefaultAsync();
+
+            if (result2 != null)
+            {
+                var passHash2 = Encrypt(request.Password);
+
+                if(result2.Result != null)
+                {
+                    if (passHash2 == result2.Result.PasswordHash)
+                    {
+                        await _loginAuditRepository.LoginAudit(loginAudit);
+                        var userInfo = await _userManager.FindByNameAsync(request.UserName);
+                        var authUser = await _userRepository.BuildUserAuthObject(userInfo);
+                        var onlineUser = new UserInfoToken
+                        {
+                            Email = authUser.Email,
+                            Id = authUser.Id
+                        };
+                        await _hubContext.Clients.All.Joined(onlineUser);
+                        return authUser;
+                    } else
+                    {
+                        return new UserAuthDto
+                        {
+                            StatusCode = 401,
+                            Messages = new List<string> { "UserName Or Password is InCorrect." }
+                        };
+                    }
+                }
+                else
+                {
+                    loginAudit.Status = "Error";
+                    await _loginAuditRepository.LoginAudit(loginAudit);
+                    return new UserAuthDto
+                    {
+                        StatusCode = 401,
+                        Messages = new List<string> { "UserName Or Password is InCorrect." }
+                    };
+                }
+            }
+            else
+            {
+                loginAudit.Status = "Error";
+                await _loginAuditRepository.LoginAudit(loginAudit);
+                return new UserAuthDto
+                {
+                    StatusCode = 401,
+                    Messages = new List<string> { "UserName Or Password is InCorrect." }
+                };
+            }
+
+            
+            /*if (result.Succeeded)
             {
                 await _loginAuditRepository.LoginAudit(loginAudit);
                 var userInfo = await _userManager.FindByNameAsync(request.UserName);
@@ -72,7 +127,7 @@ namespace DocumentManagement.MediatR.Handlers
                     StatusCode = 401,
                     Messages = new List<string> { "UserName Or Password is InCorrect." }
                 };
-            }
+            }*/
         }
 
         public static string Encrypt(string clearText)

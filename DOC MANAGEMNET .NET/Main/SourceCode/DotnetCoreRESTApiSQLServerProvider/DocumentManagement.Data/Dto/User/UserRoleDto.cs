@@ -9,5 +9,7 @@ namespace DocumentManagement.Data.Dto
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string DepartmentId { get; set; }
+        public string PlantId { get; set; }
     }
 }

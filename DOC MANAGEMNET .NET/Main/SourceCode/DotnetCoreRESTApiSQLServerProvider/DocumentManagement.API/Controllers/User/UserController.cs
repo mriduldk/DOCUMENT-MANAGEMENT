@@ -15,7 +15,7 @@ namespace DocumentManagement.API.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    /*[Authorize]*/
     public class UserController : BaseController
     {
         public IMediator _mediator { get; set; }

@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  apiUrl: '/',
+  //apiUrl: 'http://fnsprd/DocumentManagement/',
+  apiUrl: 'http://localhost/DocumentManagement/',
   allowExtesions: [
     {
       type: 'office',

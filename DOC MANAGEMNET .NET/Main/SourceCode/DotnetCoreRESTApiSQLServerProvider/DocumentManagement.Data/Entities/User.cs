@@ -9,6 +9,7 @@ namespace DocumentManagement.Data
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool IsDeleted { get; set; }
+        public string PasswordHash { get; set; }
         public virtual ICollection<UserClaim> UserClaims { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<UserToken> UserTokens { get; set; }

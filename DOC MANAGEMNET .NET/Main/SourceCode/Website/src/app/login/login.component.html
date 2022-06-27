@@ -15,15 +15,15 @@
         <div class="row">
           <div class="col-md-12 col-sm-12 col-12">
             <div class="form-group ">
-              <label>{{'EMAIL' | translate}}</label>
+              <label>{{'USERNAME' | translate}}</label>
               <input formControlName="userName" class="form-control" type="text">
               <div *ngIf="loginFormGroup.get('userName').touched && loginFormGroup.get('userName').errors"
                 class="k-tooltip-validation">
                 <div class="text-danger" *ngIf="loginFormGroup.get('userName').errors?.required">
-                  {{'EMAIL_IS_REQUIRED' | translate}}
+                  {{'USERNAME_IS_REQUIRED' | translate}}
                 </div>
                 <div class="text-danger" *ngIf="loginFormGroup.get('userName').errors?.email">
-                  {{'PLEASE_ENTER_VALID_EMAIL' | translate}}
+                  {{'PLEASE_ENTER_VALID_USERNAME' | translate}}
                 </div>
               </div>
             </div>

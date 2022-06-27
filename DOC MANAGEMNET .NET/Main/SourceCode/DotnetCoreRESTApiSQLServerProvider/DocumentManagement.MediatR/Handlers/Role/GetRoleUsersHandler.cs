@@ -27,7 +27,9 @@ namespace DocumentManagement.MediatR.Handlers
                     RoleId = cs.RoleId,
                     UserName = cs.User.UserName,
                     FirstName = cs.User.FirstName,
-                    LastName = cs.User.LastName
+                    LastName = cs.User.LastName,
+                    DepartmentId = cs.DepartmentId,
+                    PlantId = cs.PlantId
                 }).ToList();
 
             return Task.FromResult(userRoles);
